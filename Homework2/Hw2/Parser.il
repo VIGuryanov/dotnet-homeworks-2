@@ -20,7 +20,7 @@
         stloc.1
         
         ldelem.ref
-        call valuetype [Hw2]Hw2.CalculatorOperation [HW2]HW2.Parser::ParseOperation(string)
+        call valuetype [Hw2]Hw2.CalculatorOperation HW2.Parser::ParseOperation(string)
         starg 2
         
         ldelem.ref
