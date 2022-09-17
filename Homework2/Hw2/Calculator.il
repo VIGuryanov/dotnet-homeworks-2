@@ -1,7 +1,7 @@
 ﻿.class public abstract sealed auto ansi beforefieldinit
   Hw2.Calculator
 {
-    .method public static float64 Calculate (float64 value1, valuetype CalculatorOperation operation, float64 value2) cil managed
+    .method public static float64 Calculate (float64 value1, valuetype [Hw2]Hw2.CalculatorOperation operation, float64 value2) cil managed
     {
         .maxstack 4
                

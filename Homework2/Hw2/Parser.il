@@ -3,26 +3,24 @@
 {
     .method public static void ParseCalcArguments(string[] args,
         [out] float64& val1,
-        [out] valuetype CalculatorOperation& operation,
+        [out] valuetype [Hw2]Hw2.CalculatorOperation& operation,
         [out] float64& val2)
     {
         ldarg.0
-        ldlen
-        conv.i4
-        ldc.i4.3
-        beq SuppLen
+        call bool [HW2]HW2.IsArgLengthSupported::ParseOperation(string[])
+        brtrue.s SuppLen
         ldstr "Invalid count of input arguments"
         newobj instance void [System.Runtime]System.ArgumentException::.ctor(string)
         throw
-        
-        SuppLen:
+            
+        SuppLen:     
         ldelem.ref
         ldarg.3
         call bool [System.Runtime]System.Double::TryParse(string, float64&)
         stloc.1
         
         ldelem.ref
-        call valuetype CalculatorOperation HW2.Parser::ParseOperation(string)
+        call valuetype [Hw2]Hw2.CalculatorOperation [HW2]HW2.Parser::ParseOperation(string)
         starg 2
         
         ldelem.ref
@@ -38,7 +36,16 @@
         ret
     }
     
-    .method public static valuetype CalculatorOperation ParseOperation(string arg)
+    .method private static bool IsArgLengthSupported (string[] args) cil managed
+    {
+        ldarg.0         
+        ldlen   
+        ldc.i4.3       
+        ceq  
+        ret
+    }
+    
+    .method public static valuetype [Hw2]Hw2.CalculatorOperation ParseOperation(string arg)
     {
         ldstr "Plus"
         ldarg.0
