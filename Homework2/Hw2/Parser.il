@@ -7,7 +7,7 @@
         [out] float64& val2)
     {
         ldarg.0
-        call bool HW2.IsArgLengthSupported::ParseOperation(string[])
+        call bool HW2.Parser::IsArgLengthSupported(string[])
         brtrue.s SuppLen
         ldstr "Invalid count of input arguments"
         newobj instance void [System.Runtime]System.ArgumentException::.ctor(string)
