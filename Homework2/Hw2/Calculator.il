@@ -2,9 +2,10 @@
   Hw2.Calculator
 {
     .method public static float64 Calculate (float64 value1, valuetype [Hw2]Hw2.CalculatorOperation operation, float64 value2) cil managed
-    {
-        .maxstack 4
-               
+    {  
+        ldarg.0
+        ldarg.2
+                
         ldc.i4.0
         ldarg.1
         beq Plus
@@ -24,22 +25,19 @@
         newobj instance void [System.Runtime]System.ArgumentOutOfRangeException::.ctor()
         throw
         
-        ldarg.0
-        ldarg.2
-        
         Plus:
         add
         ret
         
-        Minus:
+        Minus:      
         sub
         ret
         
-        Multiply:
+        Multiply:   
         mul
         ret
         
-        Divide:
+        Divide:     
         div
         ret
     }
