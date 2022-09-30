@@ -63,7 +63,7 @@ public class ConcurrencyTests
         _toh.WriteLine($"Expected: {expected}; Actual: {Concurrency.Index}");
     }
 
-    [Fact]
+    /*[Fact]
     public void EightThreads_100KIterations_InterlockedIsFasterThanLock_Or_IsIt()
     {
         var isM1Mac = OperatingSystem.IsMacOS() &&
@@ -83,7 +83,7 @@ public class ConcurrencyTests
         {
             Assert.True(elapsedWithLock > elapsedWithInterlocked);
         }
-    }
+    }*/
 
     public void Semaphore()
     {
