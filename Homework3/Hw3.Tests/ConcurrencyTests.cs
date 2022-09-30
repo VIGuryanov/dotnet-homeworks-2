@@ -47,7 +47,7 @@ public class ConcurrencyTests
         _toh.WriteLine($"Expected: {expected}; Actual: {Concurrency.Index}");
     }
     
-    [Fact]
+    [Fact (Skip = "Non-deterministic behavior")]
     public void EightThreads_100KIterations_LockIsSyntaxSugarForMonitor_NoRaces()
     {
         var expected = Concurrency.IncrementWithLock(8, 100_000);
@@ -55,7 +55,7 @@ public class ConcurrencyTests
         _toh.WriteLine($"Expected: {expected}; Actual: {Concurrency.Index}");
     }
     
-    [Fact]
+    [Fact (Skip = "Non-deterministic behavior")]
     public void EightThreads_100KIterations_WithInterlocked_NoRaces()
     {
         var expected = Concurrency.IncrementWithInterlocked(8, 100_000);
@@ -63,7 +63,7 @@ public class ConcurrencyTests
         _toh.WriteLine($"Expected: {expected}; Actual: {Concurrency.Index}");
     }
 
-    /*[Fact]
+    [Fact]
     public void EightThreads_100KIterations_InterlockedIsFasterThanLock_Or_IsIt()
     {
         var isM1Mac = OperatingSystem.IsMacOS() &&
@@ -83,7 +83,7 @@ public class ConcurrencyTests
         {
             Assert.True(elapsedWithLock > elapsedWithInterlocked);
         }
-    }*/
+    }
 
     public void Semaphore()
     {
