@@ -29,7 +29,7 @@ public class SingleInitializationSingleton
                 if(_isInitialized)
                 {
                     _isInitialized = false;
-                    instance = new Lazy<SingleInitializationSingleton>(() => new SingleInitializationSingleton());
+                    instance = new(() => new SingleInitializationSingleton());
                 }
             }
         }
@@ -44,7 +44,7 @@ public class SingleInitializationSingleton
                 if(!_isInitialized)
                 {
                     _isInitialized = true;
-                    instance = new Lazy<SingleInitializationSingleton>(() => new SingleInitializationSingleton(delay));
+                    instance = new(() => new SingleInitializationSingleton(delay));
                 }
                 else
                     throw new InvalidOperationException("Double initialization!");
@@ -54,7 +54,7 @@ public class SingleInitializationSingleton
             throw new InvalidOperationException("Double initialization!");
     }
 
-    private static Lazy<SingleInitializationSingleton> instance = new Lazy<SingleInitializationSingleton>(() => new SingleInitializationSingleton());
+    private static Lazy<SingleInitializationSingleton> instance = new(() => new SingleInitializationSingleton());
 
     public static SingleInitializationSingleton Instance
     {

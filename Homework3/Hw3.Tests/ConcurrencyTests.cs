@@ -24,20 +24,20 @@ public class ConcurrencyTests
         Assert.Equal(expected, Concurrency.Index);
     }
     
-    [Fact]
+    [Fact (Skip = "Non-deterministic behavior")]
     public void FiveThreads_100Iterations_RaceIsHardToReproduce()
     {
         var expected = Concurrency.Increment(5, 1000);
         Assert.Equal(expected, Concurrency.Index);
     }
     
-    /*[Fact]
+    [Fact (Skip = "Non-deterministic behavior")]
     public void EightThreads_100KIterations_RaceIsReproduced()
     {
         var expected = Concurrency.Increment(8, 100_000);
         Assert.NotEqual(expected, Concurrency.Index);
         _toh.WriteLine($"Expected: {expected}; Actual: {Concurrency.Index}");
-    }*/
+    }
 
     [Fact]
     public void EightThreads_100KIterations_WithLock_NoRaces()
@@ -47,7 +47,7 @@ public class ConcurrencyTests
         _toh.WriteLine($"Expected: {expected}; Actual: {Concurrency.Index}");
     }
     
-    [Fact (Skip = "Non-deterministic behavior")]
+    [Fact]
     public void EightThreads_100KIterations_LockIsSyntaxSugarForMonitor_NoRaces()
     {
         var expected = Concurrency.IncrementWithLock(8, 100_000);
@@ -55,7 +55,7 @@ public class ConcurrencyTests
         _toh.WriteLine($"Expected: {expected}; Actual: {Concurrency.Index}");
     }
     
-    [Fact (Skip = "Non-deterministic behavior")]
+    [Fact]
     public void EightThreads_100KIterations_WithInterlocked_NoRaces()
     {
         var expected = Concurrency.IncrementWithInterlocked(8, 100_000);
