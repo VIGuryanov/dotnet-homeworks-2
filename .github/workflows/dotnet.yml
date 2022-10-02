@@ -24,7 +24,6 @@ jobs:
       - name: Codecov
         uses: codecov/codecov-action@v3.1.0
 
-
   test:
     runs-on: ubuntu-latest
     steps:
@@ -37,4 +36,4 @@ jobs:
         if: success() || failure()
         with:
           name: test-results
-          path: HomeWork*/Hw*Tests/TestResults/*.trx
+          path: 'Homework*/Hw*.Tests/TestResults/*.trx'
