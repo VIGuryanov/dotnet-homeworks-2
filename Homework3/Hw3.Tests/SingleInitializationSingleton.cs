@@ -10,58 +10,48 @@ public class SingleInitializationSingleton
     private static volatile bool _isInitialized = false;
 
     public const int DefaultDelay = 3_000;
-    
-    public int Delay { get; private set;}
+
+    public int Delay { get; private set; }
 
     private SingleInitializationSingleton(int delay = DefaultDelay)
     {
         Delay = delay;
         // imitation of complex initialization logic
-        Thread.Sleep(delay);           
+        Thread.Sleep(delay);
     }
 
-    internal static void Reset()
+    internal static void Reset() => ChangeInitializationCondition(true);
+
+    public static void Initialize(int delay) => ChangeInitializationCondition(false, delay, true);
+
+    static void ChangeInitializationCondition(bool isInitializedExpected, int singletonDelay = DefaultDelay, bool doubleCallProhibited = false, string throwDoubleInitializeMessage = "Double initialization!")
     {
-        if(_isInitialized)
+        InitializationConditionCheck(isInitializedExpected, () =>
         {
-            lock(Locker)
+            lock (Locker)
             {
-                if(_isInitialized)
+                InitializationConditionCheck(isInitializedExpected, () =>
                 {
-                    _isInitialized = false;
-                    instance = new(() => new SingleInitializationSingleton());
-                }
+                    _isInitialized = !isInitializedExpected;
+                    instance = CreateLazyDefaults(singletonDelay);
+                }, doubleCallProhibited, throwDoubleInitializeMessage);
             }
-        }
+        }, doubleCallProhibited, throwDoubleInitializeMessage);
     }
 
-    public static void Initialize(int delay)
+    static void InitializationConditionCheck(bool isInitializedExpected, Action checkPassed, bool doubleCallProhibited, string throwDoubleInitializeMessage)
     {
-        if(!_isInitialized)
-        {
-            lock(Locker)
-            {
-                if(!_isInitialized)
-                {
-                    _isInitialized = true;
-                    instance = new(() => new SingleInitializationSingleton(delay));
-                }
-                else
-                    throw new InvalidOperationException("Double initialization!");
-            }
-        }
-        else
-            throw new InvalidOperationException("Double initialization!");
+        if (_isInitialized == isInitializedExpected)
+            checkPassed();
+        else if (doubleCallProhibited)
+            throw ThrowDoubleInitialize(throwDoubleInitializeMessage);
     }
 
-    private static Lazy<SingleInitializationSingleton> instance = new(() => new SingleInitializationSingleton());
+    static Exception ThrowDoubleInitialize(string? message = null) => new InvalidOperationException(message);
 
-    public static SingleInitializationSingleton Instance
-    {
-        get
-        { 
-            lock(Locker)
-                return instance.Value; 
-        }
-    }    
+    static Lazy<SingleInitializationSingleton> CreateLazyDefaults(int delay = DefaultDelay) => new(() => new SingleInitializationSingleton(delay));
+
+    private static Lazy<SingleInitializationSingleton> instance = CreateLazyDefaults();
+
+    public static SingleInitializationSingleton Instance => instance.Value;
 }
