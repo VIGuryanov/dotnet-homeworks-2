@@ -7,13 +7,6 @@ let isArgLengthSupported (args:string[]): Result<'a,'b> =
     match args.Length with
     | 3 -> Ok args
     | _ -> Error Message.WrongArgLength
-    
-[<System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage>]
-let inline isOperationSupported (arg1, operation, arg2): Result<('a * CalculatorOperation * 'b), Message> =
-    match operation with
-    | (CalculatorOperation.Plus | CalculatorOperation.Minus |
-        CalculatorOperation.Multiply | CalculatorOperation.Divide) -> Ok (arg1, operation, arg2)
-    | _ -> Error Message.WrongArgFormatOperation
 
 let parseValue (value: string): Result<'a, Message> =
     let flag, _val = System.Decimal.TryParse(value)
@@ -22,10 +15,10 @@ let parseValue (value: string): Result<'a, Message> =
 
 let parseOperation(operation: string): Result<CalculatorOperation, Message> =
     match operation with
-    | "+" -> Ok CalculatorOperation.Plus
-    | "-" -> Ok CalculatorOperation.Minus
-    | "*" -> Ok CalculatorOperation.Multiply
-    | "/" -> Ok CalculatorOperation.Divide
+    | Calculator.plus -> Ok CalculatorOperation.Plus
+    | Calculator.minus -> Ok CalculatorOperation.Minus
+    | Calculator.multiply -> Ok CalculatorOperation.Multiply
+    | Calculator.divide -> Ok CalculatorOperation.Divide
     | _ -> Error Message.WrongArgFormatOperation
 
 
@@ -49,9 +42,8 @@ let inline isDividingByZero (arg1, operation, arg2): Result<('a * CalculatorOper
 let parseCalcArguments (args: string[]): Result<'a, 'b> =
     MaybeBuilder.maybe
         {
-            let! a = args |> isArgLengthSupported 
-            let! b = a |> parseArgs
-            let! c = b |> isOperationSupported
-            let! d = c |> isDividingByZero
-            return d
+            let! c1 = args |> isArgLengthSupported 
+            let! c2 = c1 |> parseArgs
+            let! c3 = c2 |> isDividingByZero
+            return c3
         }
