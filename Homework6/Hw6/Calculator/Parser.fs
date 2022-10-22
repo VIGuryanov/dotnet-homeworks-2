@@ -3,11 +3,6 @@
 open System
 open Hw5.Calculator
 
-let isArgLengthSupported (args:string[]): Result<'a,'m> =
-    match args.Length with
-    | 3 -> Ok args
-    | _ -> Error "WrongArgLength"
-
 let parseValue (value: string): Result<'a, 'b> =
     let flag, _val = System.Decimal.TryParse(value)
     if flag then Ok _val
@@ -42,8 +37,7 @@ let inline isDividingByZero (arg1, operation, arg2): Result<('a * CalculatorOper
 let parseCalcArguments (args: string[]): Result<'a, 'b> =
     MaybeBuilder.maybe
         {
-            let! c1 = args |> isArgLengthSupported 
-            let! c2 = c1 |> parseArgs
-            let! c3 = c2 |> isDividingByZero
-            return c3
+            let! c1 = args |> parseArgs
+            let! c2 = c1 |> isDividingByZero
+            return c2
         }
