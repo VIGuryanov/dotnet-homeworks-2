@@ -65,13 +65,18 @@ let WebClient =
     }
 
 [<System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage>]
-let RunAll()=
-    [|WebClient|]
-    |> Async.Parallel
-    |> Async.RunSynchronously
-    |> ignore
+//let RunAll()=
+ //   [|WebClient|]
+//    |> Async.Parallel
+//    |> Async.RunSynchronously
+//    |> ignore
         
 [<EntryPoint>]
 let main _ =
-    RunAll()
+    //RunAll()
+    Host
+        .CreateDefaultBuilder()
+        .ConfigureWebHostDefaults(fun whBuilder -> whBuilder.UseStartup<Startup>() |> ignore)
+        .Build()
+        .Run()
     0
