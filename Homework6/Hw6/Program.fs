@@ -7,17 +7,31 @@ open Microsoft.Extensions.Logging
 open Microsoft.Extensions.DependencyInjection
 open Giraffe
 open Hw5.CalculatorMain
+open Hw5
 open Microsoft.AspNetCore.Http
 
-let SeparateMathAndClientErrors (err: string): Result<string,string> =
-    match err with
-    |"DivideByZero" -> Ok err
+let GetErrorMessage(err: Message*string)=
+    let item1,item2 = err
+    item1
+
+let GetErrorText(err: Message*string)=
+    let item1,item2 = err
+    item2
+
+let SeparateMathAndClientErrors (err: Message*string): Result<Message*string,Message*string> =
+    match GetErrorMessage err with
+    |Message.DivideByZero -> Ok err
     |_ -> Error err
 
-let CalcResulConverter (value: Result<decimal, string>) = 
+let ErrorResultGetText(err: Result<Message*string,Message*string>) =
+    match err with
+    |Ok err -> Ok (GetErrorText err);
+    |Error err -> Error (GetErrorText err);
+
+let CalcResulConverter (value: Result<decimal, Message*string>) = 
     match value with
     |Ok value -> Ok (value.ToString());
-    |Error value -> (SeparateMathAndClientErrors value);
+    |Error value -> ErrorResultGetText (SeparateMathAndClientErrors value);
 
 let FormatQueryCalcOperator (op : string): string = 
     match op with

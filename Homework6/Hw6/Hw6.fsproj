@@ -14,8 +14,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Include="Calculator\Calculator.fs" />
         <Compile Include="Calculator\MaybeBuilder.fs" />
+        <Compile Include="Calculator\Message.fs" />
+        <Compile Include="Calculator\Calculator.fs" />
         <Compile Include="Calculator\Parser.fs" />
         <Compile Include="Calculator\CalculatorMain.fs" />
         <Compile Include="Program.fs" />

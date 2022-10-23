@@ -3,10 +3,13 @@
 open System
 open Hw5.Calculator
 
+let wrongParseMessage (value :string) =
+    $"Could not parse value '{value}'"
+
 let parseValue (value: string): Result<'a, 'b> =
     let flag, _val = System.Decimal.TryParse(value)
     if flag then Ok _val
-    else Error $"Could not parse value '{value}'"
+    else Error (Message.WrongArgFormat, wrongParseMessage value)
 
 let parseOperation(operation: string): Result<CalculatorOperation, 'm> =
     match operation with
@@ -14,7 +17,7 @@ let parseOperation(operation: string): Result<CalculatorOperation, 'm> =
     | Calculator.minus -> Ok CalculatorOperation.Minus
     | Calculator.multiply -> Ok CalculatorOperation.Multiply
     | Calculator.divide -> Ok CalculatorOperation.Divide
-    | _ -> Error $"Could not parse value '{operation}'"
+    | _ -> Error (Message.WrongArgFormatOperation, wrongParseMessage operation)
 
 
 let parseArgs (args: string[]): Result<('a * CalculatorOperation * 'b), 'm> =
@@ -30,7 +33,7 @@ let parseArgs (args: string[]): Result<('a * CalculatorOperation * 'b), 'm> =
 let inline isDividingByZero (arg1, operation, arg2): Result<('a * CalculatorOperation * 'b), 'm> =
     match operation with
     | CalculatorOperation.Divide -> 
-        if arg2 = Decimal.Zero then Error "DivideByZero"
+        if arg2 = Decimal.Zero then Error (Message.DivideByZero, "DivideByZero")
         else Ok (arg1, operation, arg2)
     | _ -> Ok (arg1, operation, arg2)
     
