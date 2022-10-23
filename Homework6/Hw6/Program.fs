@@ -55,14 +55,14 @@ type Startup() =
     member _.Configure (app : IApplicationBuilder) (_ : IHostEnvironment) (_ : ILoggerFactory) =
         app.UseGiraffe webApp
 
-let WebClient = 
-    async{
-        Host
-            .CreateDefaultBuilder()
-            .ConfigureWebHostDefaults(fun whBuilder -> whBuilder.UseStartup<Startup>() |> ignore)
-            .Build()
-            .Run()
-    }
+//let WebClient = 
+ //   async{
+//        Host
+ //           .CreateDefaultBuilder()
+//            .ConfigureWebHostDefaults(fun whBuilder -> whBuilder.UseStartup<Startup>() |> ignore)
+//            .Build()
+//            .Run()
+//    }
 
 [<System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage>]
 //let RunAll()=
