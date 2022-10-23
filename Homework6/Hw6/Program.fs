@@ -64,6 +64,7 @@ let WebClient =
             .Run()
     }
 
+[<System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage>]
 let RunAll()=
     [|WebClient; ConsoleClient|]
     |> Async.Parallel
