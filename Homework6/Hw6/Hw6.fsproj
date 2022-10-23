@@ -4,7 +4,6 @@
         <TargetFramework>net6.0</TargetFramework>
         <AssemblyName>Hw6.App</AssemblyName>
         <EnableDefaultContentItems>false</EnableDefaultContentItems>
-        <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
         <RootNamespace>Hw6</RootNamespace>
     </PropertyGroup>
 
