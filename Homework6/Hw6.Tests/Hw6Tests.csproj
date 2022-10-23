@@ -8,8 +8,6 @@
         <RootNamespace>Hw6Tests</RootNamespace>
 
         <AssemblyName>Hw6Tests</AssemblyName>
-
-        <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
     </PropertyGroup>
 
     <ItemGroup>
