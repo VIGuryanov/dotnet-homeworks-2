@@ -5,7 +5,6 @@ open System.Net
 open Microsoft.FSharp.Control.WebExtensions
 open System.IO
 
-[<System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage>]
 let GetExceptionMesage(wex: WebException) =
     if not (obj.ReferenceEquals(wex.Response, null))
     then
@@ -15,7 +14,6 @@ let GetExceptionMesage(wex: WebException) =
     else 
         "Bad request"
 
-[<System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage>]
 let DownloadResponse(uri: Uri) =
     try
         let webClient = new WebClient()
@@ -25,7 +23,6 @@ let DownloadResponse(uri: Uri) =
     with
     | :? System.Net.WebException as wex -> GetExceptionMesage wex
 
-[<System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage>]
 let ConsoleClient = 
     async{
         printfn "Enter domain. For example localhost:<number>"
@@ -42,3 +39,8 @@ let ConsoleClient =
             else
                 printfn "Response: Wrong args count"
     }
+
+let Main = 
+    ConsoleClient
+    |>Async.RunSynchronously
+    0

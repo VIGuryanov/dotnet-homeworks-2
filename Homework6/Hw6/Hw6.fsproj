@@ -14,7 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Include="ConsoleClient.fs" />
         <Compile Include="Calculator\Calculator.fs" />
         <Compile Include="Calculator\MaybeBuilder.fs" />
         <Compile Include="Calculator\Parser.fs" />

@@ -8,7 +8,6 @@ open Microsoft.Extensions.DependencyInjection
 open Giraffe
 open Hw5.CalculatorMain
 open Microsoft.AspNetCore.Http
-open Hw6.ConsoleClient
 
 let SeparateMathAndClientErrors (err: string): Result<string,string> =
     match err with
@@ -54,26 +53,9 @@ type Startup() =
 
     member _.Configure (app : IApplicationBuilder) (_ : IHostEnvironment) (_ : ILoggerFactory) =
         app.UseGiraffe webApp
-
-//let WebClient = 
- //   async{
-//        Host
- //           .CreateDefaultBuilder()
-//            .ConfigureWebHostDefaults(fun whBuilder -> whBuilder.UseStartup<Startup>() |> ignore)
-//            .Build()
-//            .Run()
-//    }
-
-[<System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage>]
-//let RunAll()=
- //   [|WebClient|]
-//    |> Async.Parallel
-//    |> Async.RunSynchronously
-//    |> ignore
         
 [<EntryPoint>]
 let main _ =
-    //RunAll()
     Host
         .CreateDefaultBuilder()
         .ConfigureWebHostDefaults(fun whBuilder -> whBuilder.UseStartup<Startup>() |> ignore)
