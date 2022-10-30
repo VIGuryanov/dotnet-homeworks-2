@@ -16,7 +16,7 @@ public class CalculatorController : Controller
     {
         try
         {
-            CalcParser.ParseCalcArguments(
+            CalculatorParser.ParseCalcArguments(
                 new ReadOnlyCollection<string>(new List<string>() { val1, operation, val2 }),
                 out double value1,
                 out Operation op,

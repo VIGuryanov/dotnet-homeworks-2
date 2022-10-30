@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 
 namespace Hw8.Calculator;
 
-public static class CalcParser
+public static class CalculatorParser
 {
     public static void ParseCalcArguments(ReadOnlyCollection<string> args,
         out double val1,
