@@ -7,10 +7,11 @@
         Multiplication,
         Division,
         OpeningBracket,
-        ClosingBracket
+        ClosingBracket,
+        Undefined
     }
 
-    public static class OperatorTypeExtentions
+    public static class OperatorTypeExtensions
     {
         public static string ToString(OperatorType opType) =>
             opType switch

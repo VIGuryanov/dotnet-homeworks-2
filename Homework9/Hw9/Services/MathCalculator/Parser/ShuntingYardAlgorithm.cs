@@ -23,6 +23,7 @@ namespace Hw9.Services.MathCalculator.Parser
             return GetResult();
         }
 
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         private void ProcessToken(IToken token)
         {
             switch (token)
@@ -54,6 +55,7 @@ namespace Hw9.Services.MathCalculator.Parser
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         private void PushClosingBracket()
         {
             bool openingBracketFound = false;
@@ -98,6 +100,7 @@ namespace Hw9.Services.MathCalculator.Parser
             operatorsStack.Push(operatorToken);
         }
 
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         private static int GetOperatorPriority(OperatorToken operatorToken) =>
             operatorToken.Operator switch
             {
@@ -106,7 +109,7 @@ namespace Hw9.Services.MathCalculator.Parser
                 _ => throw new InvalidOperationException($"An unexpected action for the operator: {operatorToken.Operator}."),
             };
 
-
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         private List<IToken> GetResult()
         {
             while (operatorsStack.Count > 0)

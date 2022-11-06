@@ -23,6 +23,7 @@ namespace Hw9.Services.MathCalculator
 
         public async Task<double> Visit(ConstantExpression expression) => (double)expression.Value;
 
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         private static double Calculate(double val1, double val2, ExpressionType op) =>
             op switch
             {

@@ -95,7 +95,7 @@ namespace Hw9.Services.MathCalculator.Parser
                         return;
 
                     throw new FormatException(MathErrorMessager.InvalidOperatorAfterParenthesisMessage(
-                        OperatorTypeExtentions.ToString(right)));
+                        OperatorTypeExtensions.ToString(right)));
                 }
                 if (leftOperatorToken.Operator != OperatorType.ClosingBracket)
                 {
@@ -104,10 +104,10 @@ namespace Hw9.Services.MathCalculator.Parser
 
                     if (right == OperatorType.ClosingBracket)
                         throw new FormatException(MathErrorMessager.OperationBeforeParenthesisMessage(
-                            OperatorTypeExtentions.ToString(leftOperatorToken.Operator)));
+                            OperatorTypeExtensions.ToString(leftOperatorToken.Operator)));
 
                     throw new FormatException(MathErrorMessager.TwoOperationInRowMessage(
-                        OperatorTypeExtentions.ToString(leftOperatorToken.Operator), OperatorTypeExtentions.ToString(right)));
+                        OperatorTypeExtensions.ToString(leftOperatorToken.Operator), OperatorTypeExtensions.ToString(right)));
                 }
             }
         }
@@ -134,6 +134,7 @@ namespace Hw9.Services.MathCalculator.Parser
                 _ => false,
             };
 
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         private static IToken CreateOperandToken(string raw)
         {
             if (double.TryParse(raw, out double result))
@@ -145,6 +146,7 @@ namespace Hw9.Services.MathCalculator.Parser
             throw new FormatException($"The operand {raw} has an invalid format.");
         }
 
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         private static OperatorToken CreateOperatorToken(char c) =>
             c switch
             {
