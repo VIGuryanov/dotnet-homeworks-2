@@ -5,8 +5,10 @@ namespace Hw9.Services.MathCalculator
 {
     public class CalculatorExpressionVisitor
     {
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public async Task<double> VisitTree(Expression expression) => await Visit((dynamic)expression);
 
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public async Task<double> Visit(BinaryExpression expression)
         {
             Thread.Sleep(1000);
@@ -21,6 +23,7 @@ namespace Hw9.Services.MathCalculator
             return Calculate(lval, rval, expression.NodeType);
         }
 
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         public async Task<double> Visit(ConstantExpression expression) => (double)expression.Value;
 
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
