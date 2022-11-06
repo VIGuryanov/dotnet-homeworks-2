@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hw9.Services.MathCalculator.Parser
 {
-    public class MathExpressionTokenizerParser
+    public class MathExpressionTokenizerParser : IMathExpressionTokenizerParser
     {
         private readonly StringBuilder valueBuilder;
         private readonly List<IToken> infixNotation;

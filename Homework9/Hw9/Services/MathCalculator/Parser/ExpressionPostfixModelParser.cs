@@ -3,9 +3,9 @@ using System.Linq.Expressions;
 
 namespace Hw9.Services.MathCalculator.Parser
 {
-    public class ExpressionPostfixModelParser
+    public static class ExpressionPostfixModelParser
     {
-        public Expression Parse(IEnumerable<IToken> input)
+        public static Expression Parse(IEnumerable<IToken> input)
         {
             var stack = new Stack<Expression>();
             Expression v1;

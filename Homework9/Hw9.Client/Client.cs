@@ -1,4 +1,4 @@
-﻿public class Program
+﻿public class Client
 {
     public static async Task Main()
     {
@@ -6,7 +6,7 @@
         var domain = Console.ReadLine();
 
         Console.WriteLine("Enter math expression");
-        var client = new HttpClient();
+        using var client = new HttpClient();
 
         while (true)
         {
@@ -14,6 +14,9 @@
 
             if (expression == null)
                 continue;
+
+            if(expression.ToLower() == "stop")
+                break;
 
             var values = new Dictionary<string, string>
             {

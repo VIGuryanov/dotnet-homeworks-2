@@ -9,7 +9,7 @@ namespace Hw9.Tests
         [Fact]
         public static void ExpressionPostfixModelParserThrowsArgumentExceptionOnUnexpectedToken()
         {
-            Assert.Throws<ArgumentException>(() => new ExpressionPostfixModelParser().Parse(new[] { new TestToken() }));
+            Assert.Throws<ArgumentException>(() => ExpressionPostfixModelParser.Parse(new[] { new TestToken() }));
         }
     }
 

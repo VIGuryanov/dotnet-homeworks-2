@@ -1,9 +1,16 @@
 using System.Diagnostics.CodeAnalysis;
 using Hw9.Configuration;
+using Hw9.Services.MathCalculator;
+using Hw9.Services.MathCalculator.ExpressionTools;
+using Hw9.Services.MathCalculator.Parser;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<IMathExpressionTokenizerParser, MathExpressionTokenizerParser>();
+builder.Services.AddTransient<IExpressionToDictionary, ExpressionToDictionary>();
+builder.Services.AddTransient<IShuntingYardAlgorithm, ShuntingYardAlgorithm>();
 
 builder.Services.AddMathCalculator();
 

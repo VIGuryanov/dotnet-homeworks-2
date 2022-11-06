@@ -3,7 +3,7 @@ using Hw9.Services.MathCalculator.Token;
 
 namespace Hw9.Services.MathCalculator.Parser
 {
-    public class ShuntingYardAlgorithm
+    public class ShuntingYardAlgorithm : IShuntingYardAlgorithm
     {
         private readonly Stack<OperatorToken> operatorsStack;
         private readonly List<IToken> postfixNotation;

@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using Hw9.Dto;
 using Hw9.Services.MathCalculator;
+using Hw9.Services.MathCalculator.ExpressionTools;
+using Hw9.Services.MathCalculator.Parser;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hw9.Controllers
@@ -22,9 +24,13 @@ namespace Hw9.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CalculationMathExpressionResultDto>> CalculateMathExpression(string expression)
+        public async Task<ActionResult<CalculationMathExpressionResultDto>> CalculateMathExpression(
+            [FromServices] IExpressionToDictionary expressionToDictionary,
+            [FromServices] IMathExpressionTokenizerParser mathExpressionTokenizerParser,
+            [FromServices] IShuntingYardAlgorithm shuntingYardAlgorithm,
+            string expression)
         {
-            var result = await _mathCalculatorService.CalculateMathExpressionAsync(expression);
+            var result = await _mathCalculatorService.CalculateMathExpressionAsync(expression, expressionToDictionary, mathExpressionTokenizerParser, shuntingYardAlgorithm);
             return Json(result);
         }
     }
