@@ -8,14 +8,14 @@ namespace Hw10.Services.CachedCalculator;
 
 public class MathCachedCalculatorService : IMathCalculatorService
 {
-	private readonly ApplicationContext _dbContext;
-	private readonly IMathCalculatorService _simpleCalculator;
+    private readonly ApplicationContext _dbContext;
+    private readonly IMathCalculatorService _simpleCalculator;
 
-	public MathCachedCalculatorService(ApplicationContext dbContext, IMathCalculatorService simpleCalculator)
-	{
-		_dbContext = dbContext;
-		_simpleCalculator = simpleCalculator;
-	}
+    public MathCachedCalculatorService(ApplicationContext dbContext, IMathCalculatorService simpleCalculator)
+    {
+        _dbContext = dbContext;
+        _simpleCalculator = simpleCalculator;
+    }
 
     public async Task<CalculationMathExpressionResultDto> CalculateMathExpressionAsync(string? expression, IExpressionToDictionary expressionToDictionary, IMathExpressionTokenizerParser mathExpressionTokenizerParser, IShuntingYardAlgorithm shuntingYardAlgorithm)
     {
@@ -24,14 +24,15 @@ public class MathCachedCalculatorService : IMathCalculatorService
         if (dbres.Any())
         {
             Thread.Sleep(1000);
+
             return new CalculationMathExpressionResultDto(dbres.First().Result);
         }
 
         var result = await _simpleCalculator.CalculateMathExpressionAsync(expression, expressionToDictionary, mathExpressionTokenizerParser, shuntingYardAlgorithm);
 
-        if(result.IsSuccess)
+        if (result.IsSuccess)
         {
-            await _dbContext.AddAsync(new SolvingExpression{Expression = expression, Result = result.Result});
+            await _dbContext.AddAsync(new SolvingExpression { Expression = expression, Result = result.Result });
             await _dbContext.SaveChangesAsync();
         }
 
