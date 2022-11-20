@@ -10,18 +10,20 @@ namespace Hw11.Services.MathCalculator
 
         public Dictionary<Expression, Expression[]> Convert(Expression expTree)
         {
-            Visit((dynamic)expTree);
+            Visit(expTree);
             return executeBefore;
         }
+
+        private void Visit(Expression expr) => Visit((dynamic)expr);
 
         private void Visit(BinaryExpression bin)
         {
             executeBefore.Add(bin, new[] { bin.Left, bin.Right });
 
-            Visit((dynamic)bin.Left);
-            Visit((dynamic)bin.Right);
+            Visit(bin.Left);
+            Visit(bin.Right);
         }
 
-        private void Visit(ConstantExpression con) => executeBefore.Add(con, Array.Empty<Expression>());
+        private void Visit(ConstantExpression con) => executeBefore.Add(con, Array.Empty<Expression>());        
     }
 }
