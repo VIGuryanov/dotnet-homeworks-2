@@ -10,7 +10,7 @@ namespace Hw11.Services.MathCalculator
 
         public Dictionary<Expression, Expression[]> Convert(Expression expTree)
         {
-            Visit(expTree);
+            Visit((dynamic)expTree);
             return executeBefore;
         }
 
@@ -18,8 +18,8 @@ namespace Hw11.Services.MathCalculator
         {
             executeBefore.Add(bin, new[] { bin.Left, bin.Right });
 
-            Visit(bin.Left);
-            Visit(bin.Right);
+            Visit((dynamic)bin.Left);
+            Visit((dynamic)bin.Right);
         }
 
         private void Visit(ConstantExpression con) => executeBefore.Add(con, Array.Empty<Expression>());
