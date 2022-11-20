@@ -23,7 +23,5 @@ namespace Hw11.Services.MathCalculator
         }
 
         private void Visit(ConstantExpression con) => executeBefore.Add(con, Array.Empty<Expression>());
-
-        private void Visit(Expression expr) => Visit((dynamic)expr);
     }
 }
