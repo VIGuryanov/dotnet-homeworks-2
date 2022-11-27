@@ -12,6 +12,7 @@ public class Program
 
         builder.Services.AddControllersWithViews();
         builder.Services.AddTransient<ICalculator, Calculator.Calculator>();
+        builder.Services.AddMiniProfiler();
 
         var app = builder.Build();
 
@@ -27,6 +28,7 @@ public class Program
         app.UseRouting();
         app.UseAuthorization();
 
+        app.UseMiniProfiler();
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Calculator}/{action=Index}");
