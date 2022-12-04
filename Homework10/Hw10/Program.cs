@@ -1,11 +1,11 @@
 // dotcover disable
 using System.Diagnostics.CodeAnalysis;
 using Hw10.Configuration;
-using Hw10.DbModels;
 using Hw10.Services.MathCalculator.ExpressionTools;
 using Hw10.Services.MathCalculator.Parser;
 using Hw10.Services.MathCalculator;
-using Microsoft.EntityFrameworkCore;
+using Hw10.DbModels;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
@@ -18,8 +18,7 @@ builder.Services
     .AddMathCalculator()
     .AddCachedMathCalculator();
 
-builder.Services.AddDbContext<ApplicationContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddSingleton<ApplicationContext>();
 
 var app = builder.Build();
 if (!app.Environment.IsDevelopment())
