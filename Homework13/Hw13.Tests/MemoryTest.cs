@@ -35,7 +35,7 @@ public class MemoryTest : IClassFixture<WebApplicationFactory<Hw10.Program>>
             foreach (var element in list)
             {
                 var postRequest = new HttpRequestMessage(HttpMethod.Post, "/Calculator/CalculateMathExpression");
-                var formModel = new Dictionary<string, string> { { "str", element } };
+                var formModel = new Dictionary<string, string> { { "expression", element } };
                 postRequest.Content = new FormUrlEncodedContent(formModel);
                 _client.SendAsync(postRequest).GetAwaiter().GetResult();
 
