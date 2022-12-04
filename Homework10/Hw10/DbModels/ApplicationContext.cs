@@ -1,13 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿namespace Hw10.DbModels;
 
-namespace Hw10.DbModels;
-
-public class ApplicationContext : DbContext
+public class ApplicationContext
 {
-    public DbSet<SolvingExpression> SolvingExpressions => Set<SolvingExpression>();
+    public List<SolvingExpression> SolvingExpressions { get; set; }
 
-    public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
+    public ApplicationContext()
     {
-        Database.EnsureCreated();
+        SolvingExpressions = new List<SolvingExpression>();
+    }
+
+    public void Add(SolvingExpression data)
+    {
+        SolvingExpressions.Add(data);
     }
 }
